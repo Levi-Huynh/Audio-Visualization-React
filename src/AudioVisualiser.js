@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Animal from './Animal';
 
 class AudioVisualiser extends Component {
   constructor(props) {
@@ -8,17 +9,21 @@ class AudioVisualiser extends Component {
 
   componentDidUpdate() {
     this.draw();
+ 
   }
 
   draw() {
     const { audioData } = this.props;
     const canvas = this.canvas.current;
     const height = canvas.height;
+    
     const width = canvas.width;
     const context = canvas.getContext('2d');
     let x = 0;
     const sliceWidth = (width * 1.0) / audioData.length;
-
+// console.log("audioData Props", {audioData});
+// console.log("canvas width:", canvas.width, "height:", canvas.height, 
+// "sliceWidth:", sliceWidth, "audiodata.length:", audioData.length);
     context.lineWidth = 2;
     context.strokeStyle = '#000000';
     context.clearRect(0, 0, width, height);
@@ -34,8 +39,22 @@ class AudioVisualiser extends Component {
     context.stroke();
   }
 
+ log() {
+  const { audioData } = this.props;
+   for (const item of audioData) {
+     console.log("audio props:", item);
+   }
+ } 
+
+
   render() {
-    return <canvas width="300" height="300" ref={this.canvas} />;
+    return( 
+    <div>
+    <canvas width="300" height="300" ref={this.canvas} />
+
+    </div>
+    );
+   
   }
 }
 
