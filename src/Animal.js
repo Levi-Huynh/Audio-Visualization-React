@@ -4,7 +4,8 @@ class Animal extends Component {
 constructor(props) {
     super(props);
     this.state={
-        flag: 3
+        flag: 3,
+        points: 100
     }
 }
 
@@ -12,6 +13,7 @@ constructor(props) {
 
  componentWillUnmount(){
   
+
  }
 
   
@@ -32,9 +34,15 @@ StartTimerLowThresh(){
         var i = 0;
         var ref = setInterval(() => {
             if(audioData[i] === 128 || 127) {
-                this.setState({flag: 2});
+                this.setState({
+                    flag: 2
+                
+                });
             }else {
-                this.setState({flag:1});
+                this.setState(prevState)({
+                    flag:1,
+                    points: prevState.points -5
+                });
             }
 
         }, 6000);
@@ -78,6 +86,7 @@ StartmediumThresh() {
        
         <button onClick={this.StartmediumThresh.bind(this)}>Start Low Thres Timer</button>
         <button onClick={this.StopTimerLowThres.bind(this)}>Stop Low Thres Timer</button>
+            <h3>{this.state.points}</h3>
             <div className={this.state.flag===2? "Bear" : null}>
 
             </div>
